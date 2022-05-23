@@ -3,13 +3,14 @@ import axios from "axios";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import DataTable from 'react-data-table-component';
+import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 
 function FileUpload() {
 
   const [selectedFile, setSelectedFile] = useState();
   const [chartOptions, setChartOptions] = useState({});
-  const [table, setTable] = useState();
+  const [table, setTable] = useState([]);
 
 // ------------------ Upload CSV -----------------------
 
@@ -46,7 +47,7 @@ function FileUpload() {
         for(const dataObj of res.data) {
           unixArr?.push(parseFloat(dataObj.unix))
           tempArr?.push(parseFloat(dataObj.temp))
-        } 
+        }
 
         // Combine unix and temp into a single 2D array
         for(let i = 0 ; i < unixArr.length ; i++){
@@ -116,6 +117,12 @@ function FileUpload() {
     }
   ];
 
+  const tableData = {
+    columns,
+    table
+  };
+
+
   return (
     <div>
 
@@ -124,6 +131,7 @@ function FileUpload() {
        <form onSubmit={handleSubmit}>
         <input type="file" onChange={handleFileSelect}/>
         <input type="submit" value="Upload CSV" />
+      </form>
 
         <br></br><br></br>
 
@@ -137,17 +145,20 @@ function FileUpload() {
 
       <br></br><br></br><br></br>
         <h2>Data</h2>
+
+          {/* <DataTableExtensions {...tableData}> */}
             <DataTable
-              pagination
-              highlightOnHover
+              title="Temperature Data"
               columns={columns}
               data={table}
               defaultSortFieldID={1}
               dense={true}
               selectableRows
+              pagination
+              highlightOnHover
             />
+          {/* </DataTableExtensions> */}
 
-      </form>
     </div>
   );
 }
