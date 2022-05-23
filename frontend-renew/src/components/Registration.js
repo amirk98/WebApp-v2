@@ -1,5 +1,6 @@
 import React , { useState } from 'react';
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Alert } from '@mui/material';
+import AppBar from "./AppBar";
 
 function Registration() {
 
@@ -42,6 +43,7 @@ function Registration() {
 
     return(
         <Grid>
+            <AppBar/>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}></Avatar>

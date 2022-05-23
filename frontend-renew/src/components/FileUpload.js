@@ -5,6 +5,7 @@ import HighchartsReact from "highcharts-react-official";
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
+import AppBar from "./AppBar";
 
 function FileUpload() {
 
@@ -126,7 +127,10 @@ function FileUpload() {
   return (
     <div>
 
+      <AppBar/>
+
       <h1>MY WORKSPACE</h1>
+      <br></br>
 
        <form onSubmit={handleSubmit}>
         <input type="file" onChange={handleFileSelect}/>
